@@ -1,3 +1,3 @@
 # ansible-config-mgt
-## learnig is fun
+## learning is fun
 ### Onoh Somtochukwu
