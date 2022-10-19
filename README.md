@@ -1,3 +1,3 @@
-# Ansible-Config-MGT
+# Ansible-CONFIG-MGT
 
 ### Light
