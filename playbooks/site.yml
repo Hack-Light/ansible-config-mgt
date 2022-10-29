@@ -10,3 +10,7 @@
 - hosts: webservers
 - name: Webserver assignment
   import_playbook: ../static-assignments/webservers.yml
+
+- hosts: database
+- name: DB assignment
+  import_playbook: ../static-assignments/db.yml

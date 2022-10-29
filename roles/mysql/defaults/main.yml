@@ -119,6 +119,11 @@ mysql_users: []
 #     password: secret
 #     priv: *.*:USAGE
 
+  - name: tooling
+    host: 172.31.80.105
+    password: PassWord.1
+    priv: *.*
+
 mysql_disable_log_bin: false
 
 # Replication settings (replication is only enabled if master/user have values).
