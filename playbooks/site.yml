@@ -9,8 +9,13 @@
 
 - hosts: webservers
 - name: Webserver assignment
-  import_playbook: ../static-assignments/webservers.yml
+  import_playbook: ../static-assignments/uat-webservers.yml
 
-- hosts: database
+- hosts: db
 - name: DB assignment
   import_playbook: ../static-assignments/db.yml
+
+- hosts: lb
+- name: Loadbalancers assignment
+  import_playbook: ../static-assignments/loadbalancers.yml
+  when: load_balancer_is_required 
