@@ -7,7 +7,7 @@
 
     parameters {
       string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
-      string(name: 'webserver', defaultValue: false,  description: 'Ansible tag to run against webserver only')
+      // string(name: 'webserver', defaultValue: false,  description: 'Ansible tag to run against webserver only')
     }
 
   stages {
