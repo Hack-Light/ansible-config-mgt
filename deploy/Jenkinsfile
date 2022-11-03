@@ -1,45 +1,39 @@
   pipeline {
     agent any
 
+    environment{
+        ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+    }
+
+    parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+      string(name: 'webserver', defaultValue: false,  description: 'Ansible tag to run against webserver only')
+    }
+
   stages {
-    stage('Build') {
+    stage('SCM Checkout') {
       steps {
         script {
-          sh 'echo "Building Stage"'
+          git branch: 'main', url: 'https://github.com/Hack-Light/ansible-config-mgt'
         }
       }
     }
 
-    stage('Test') {
+    stage('Prepare Ansible For Execution') {
+            steps {
+                sh 'echo ${WORKSPACE}' 
+                sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
+            }
+    }
+
+    stage('Execute Ansible') {
       steps {
         script {
-          sh 'echo "Testing Stage"'
+          ansiblePlaybook credentialsId: 'ec2-user-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: '/inventory/dev.txt', playbook: '/playbooks/site.yml'
         }
       }
     }
 
-    stage('Package') {
-      steps {
-        script {
-          sh 'echo "Package Stage"'
-        }
-      }
-    }
-
-    stage('Deploy') {
-      steps {
-        script {
-          sh 'echo "Deploy Stage"'
-        }
-      }
-    }
-
-    stage('Clean Up') {
-      steps {
-        script {
-          sh 'echo "Clean Up Stage"'
-        }
-      }
-    }
+    
     }
 }
