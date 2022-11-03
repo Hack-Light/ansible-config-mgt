@@ -1,13 +1,13 @@
-  pipeline {
+pipeline {
     agent any
 
-    environment{
-        ANSIBLE_CONFIG='/etc/ansible/ansible.cfg'
+    environment {
+        ANSIBLE_CONFIG = '/etc/ansible/ansible.cfg'
     }
 
     parameters {
       string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
-      // string(name: 'webserver', defaultValue: false,  description: 'Ansible tag to run against webserver only')
+    // string(name: 'webserver', defaultValue: false,  description: 'Ansible tag to run against webserver only')
     }
 
   stages {
@@ -20,10 +20,10 @@
     }
 
     stage('Prepare Ansible For Execution') {
-            steps {
-                sh 'echo ${WORKSPACE}' 
-                sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" /etc/ansible/ansible.cfg'  
-            }
+      steps {
+        sh 'echo ${WORKSPACE}'
+        sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" /etc/ansible/ansible.cfg'
+      }
     }
 
     stage('Execute Ansible') {
@@ -33,7 +33,5 @@
         }
       }
     }
-
-    
-    }
+  }
 }
