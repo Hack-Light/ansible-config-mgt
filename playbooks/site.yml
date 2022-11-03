@@ -13,8 +13,7 @@
 - hosts: db
 - name: DB assignment
   import_playbook: ../static-assignments/db.yml
-
-- hosts: lb
-- name: Loadbalancers assignment
-  import_playbook: ../static-assignments/loadbalancers.yml
-  when: load_balancer_is_required 
+# - hosts: lb
+# - name: Loadbalancers assignment
+#   import_playbook: ../static-assignments/loadbalancers.yml
+#   when: load_balancer_is_required
