@@ -1,13 +1,29 @@
-sudo: required
+---
+#
+# Ansible managed
+#
 language: python
+
+os: linux
+dist: xenial
+
+python:
+  - "3.9"
+
 services:
   - docker
 
+cache:
+  - pip
+
 install:
-  - pip install ansible-lint
+  - pip install --upgrade pip
+  - pip install ansible ansible-lint yamllint
 
 script:
-  - ansible-lint playbook.yml
+  - yamllint .
+  - ansible-lint
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  email: false

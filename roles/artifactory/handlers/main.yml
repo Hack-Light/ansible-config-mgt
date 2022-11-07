@@ -1,19 +1,9 @@
 ---
+# handlers file for artifactory
 
-# handlers file for bbaassssiiee.artifactory
-- name: 'start artifactory'
-  become: yes
-  service:
-    name: artifactory
-    state: started
-  tags:
-    - artifactory
-    - init
-
-- name: 'restart artifactory'
-  become: yes
-  service:
+- name: restart artifactory
+  ansible.builtin.service:
     name: artifactory
     state: restarted
-  tags:
-    - artifactory
+  when:
+    - not ansible_check_mode | bool

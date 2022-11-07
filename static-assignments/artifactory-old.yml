@@ -1,0 +1,28 @@
+---
+- name: setup artifactory server
+  hosts: artifactory
+  remote_user: centos
+  become: true
+  become_user: root
+ 
+  tasks:
+    - name: Install Open JDK
+      shell: yum install java-1.8.0-openjdk -y
+
+    - name: Install yum utils
+      shell: yum install -y yum-utils device-mapper-persistent-data lvm2
+
+    - name: Configure manager
+      shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Install docker
+      shell: yum install -y docker-ce docker-ce-cli containerd.io
+
+    - name: Start docker
+      shell: systemctl start docker
+
+    - name: Pull jfrog image
+      shell: docker pull docker.bintray.io/jfrog/artifactory-oss
+
+    - name: Start Container
+      shell: docker run -it -d -p 8081:8081 --name artifactory docker.bintray.io/jfrog/artifactory-oss

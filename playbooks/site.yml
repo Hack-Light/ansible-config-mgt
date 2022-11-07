@@ -1,18 +1,23 @@
 ---
-- hosts: all
-- name: Include dynamic variables
-  import_playbook: ../static-assignments/common.yml
-  include: ../dynamic-assignments/env-vars.yml
-  tags:
-    - always
+# - hosts: all
+# - name: Include dynamic variables
+#   import_playbook: ../static-assignments/common.yml
+#   include: ../dynamic-assignments/env-vars.yml
+#   tags:
+#     - always
 
-- hosts: webservers
-- name: Webserver assignment
-  import_playbook: ../static-assignments/uat-webservers.yml
+# - hosts: webservers
+# - name: Webserver assignment
+#   import_playbook: ../static-assignments/uat-webservers.yml
 
-- hosts: db
-- name: DB assignment
-  import_playbook: ../static-assignments/db.yml
+- hosts: artifactory
+- name: artifactory assignment
+  import_playbook: ../static-assignments/artifactory.yml
+
+# - hosts: db
+# - name: DB assignment
+#   import_playbook: ../static-assignments/db.yml
+
 # - hosts: lb
 # - name: Loadbalancers assignment
 #   import_playbook: ../static-assignments/loadbalancers.yml
