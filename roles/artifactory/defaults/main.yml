@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # defaults file for artifactory
 
 # The version of artifactory to install
@@ -95,14 +94,3 @@ artifactory_systemyaml: |-
 
 # Note: artifactory_systemyaml_override is by default false,  if you want to change default artifactory_systemyaml
 artifactory_systemyaml_override: false
-=======
----
-# defaults file for artifactory
-
-# The location where Artifactory should store data.
-artifactory_file_store_dir: /data
-
-# The type of installation of artifactory.
-# Choose from "oss", "jcr" or "cpp-ce".
-artifactory_flavour: oss
->>>>>>> 1ce5faa4f9b0331928b855c12f4e54045f5059a6
