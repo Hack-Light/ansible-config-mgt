@@ -1,19 +1,7 @@
 ---
-
-# handlers file for bbaassssiiee.artifactory
-- name: 'start artifactory'
+# handlers file for distribution
+- name: restart artifactory
   become: yes
-  service:
-    name: artifactory
-    state: started
-  tags:
-    - artifactory
-    - init
-
-- name: 'restart artifactory'
-  become: yes
-  service:
-    name: artifactory
+  systemd:
+    name: "{{ artifactory_daemon }}"
     state: restarted
-  tags:
-    - artifactory

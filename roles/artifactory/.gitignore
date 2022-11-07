@@ -1,3 +1,6 @@
 .molecule
-.vagrant
+*.log
+*.swp
 .tox
+.cache
+.DS_Store

@@ -1,44 +1,52 @@
 ---
+# tasks file for artifactory
 
-- name: 'installing JFrog Artifactory'
-  include: install.yml
+- name: install java 11
+  ansible.builtin.yum:
+    name: java-11-openjdk-devel
+    state: present
 
-- name: 'setup smoke tests'
-  include: goss.yml
-  tags:
-    - goss
+- name: install java 11
+  ansible.builtin.yum:
+    name: 
+      - wget
+      - unzip
+    state: present
 
-# Storage configuration
-- name: 'ensure storage properties configuration is present'
-  template:
-    src: storage.properties
-    dest: "{{ artifactory_home }}/etc/storage.properties"
-    owner: "{{ artifactory_username }}"
-    group: "{{ artifactory_username }}"
-    mode: 0600
+- name: Configuring java path
+  ansible.builtin.template:
+    src: templates/bash-profile.j2
+    dest: .bash_profile
+  
 
-- name: 'configure derby'
-  include: derby.yml
-  tags:
-    - derby
+- name: reload the /etc/profile
+  shell: source ~/.bash_profile
 
-# Database configuration
-- name: 'ensure storage properties configuration is present'
-  template:
-    src: db.properties
-    dest: "{{ artifactory_home }}/etc/db.properties"
-    owner: "{{ artifactory_username }}"
-    group: "{{ artifactory_username }}"
-    mode: 0600
 
-- name: 'configure postgres database'
-  include: postgresql.yml
-  when: artifactory_database == 'postgresql'
-  tags:
-    - postgres
+- name: add the repository key to repos list
+  ansible.builtin.get_url:
+    url:  https://releases.jfrog.io/artifactory/artifactory-rpms/artifactory-rpms.repo 
+    dest: /home/ec2-user/jfrog-artifactory-rpms.repo
+    mode: '0755'
+ 
+- name: Copy the downloaded file to the etc repo
+  ansible.builtin.copy:
+    src: /home/ec2-user/jfrog-artifactory-rpms.repo
+    dest: /etc/yum.repos.d/jfrog-artifactory-rpms.repo
+    remote_src: yes
+    follow: yes
 
-- name: 'configure mysql database'
-  include: mysql.yml
-  when: artifactory_database == 'mysql'
-  tags:
-    - mysql
+- name: update cache
+  ansible.builtin.yum:
+    update_cache: yes
+
+- name: install artifactory
+  ansible.builtin.yum:
+    name: jfrog-artifactory-oss
+    state: present
+
+- name: start and enable artifactory
+  ansible.builtin.service:
+    name: artifactory
+    state: started
+    enabled: yes

@@ -1,47 +1,28 @@
-bbaassssiiee.artifactory
-=========
+# artifactory
+The artifactory role installs the Artifactory Pro software onto the host. Per the Vars below, it will configure a node as primary or secondary. This role uses secondary roles artifactory_nginx to install nginx.
 
-Install Artifactory, the Maven repository manager by JFrog.
+## Role Variables
+* _server_name_: **mandatory** This is the server name. eg. "artifactory.54.175.51.178.xip.io"
+* _artifactory_upgrade_only_: Perform an software upgrade only. Default is false.
 
-Requirements
-------------
+Additional variables can be found in [defaults/main.yml](./defaults/main.yml).
 
-This role was built for RedHat systems like RHEL 6, Centos 6. It needs Java, and PostgreSQL or MySQL.
+## Example Playbook
+```
+---
+- hosts: artifactory_servers
+  roles:
+    - artifactory
+```
 
-Role Variables
---------------
-artifactory_database can hold either 'mysql' or 'postgresql', you should provide the database yourself now,
-it is no longer a transitive dependency.
+## Upgrades
+The Artifactory role supports software upgrades. To use a role to perform a software upgrade only, use the _artifactory_upgrade_only_ variable and specify the version. See the following example.
 
-artifactory_password is defined in defaults/main/yml, override it in group_vars.
-
-artifactory_version is defined in vars/main.yml
-Set JAVA_OPTIONS in templates/etc-opt-jfrog-artifactory-default.j2
-
-Dependencies
-------------
-
-Artifactory needs Java and either PostgreSQL or MySQL. I tested this role with Java by geerlingguy and MariaDB by pcextreme.
-
-ansible-galaxy install -p roles pcextreme.mariadb
-ansible-galaxy install -p roles geerlingguy.java
-
-Example Playbook
-----------------
-For a complete example with this role check out my buildserver:
-git clone https://github.com/bbaassssiiee/buildserver.git
-
-Example of how to use this role:
-
-    - hosts: servers
-      roles:
-         - { role: bbaassssiiee.artifactory }
-
-License
--------
-
-BSD,MIT
-
-Author Information
-------------------
-Bas Meijer @bbaassssiiee
+```
+- hosts: artifactory_servers
+  vars:
+    artifactory_version: "{{ lookup('env', 'artifactory_version_upgrade') }}"
+    artifactory_upgrade_only: true
+  roles:
+    - artifactory
+```
