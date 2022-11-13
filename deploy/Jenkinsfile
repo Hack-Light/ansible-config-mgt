@@ -11,6 +11,16 @@ pipeline {
     }
 
   stages {
+
+    stage("Initial cleanup") {
+      steps {
+        dir("${WORKSPACE}") {
+          deleteDir()
+        }
+      }
+    }
+
+
     stage('SCM Checkout') {
       steps {
         script {
@@ -31,6 +41,12 @@ pipeline {
         script {
           ansiblePlaybook credentialsId: 'ec2-user-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}.txt', playbook: 'playbooks/site.yml'
         }
+      }
+    }
+
+    stage('Clean Workspace after build'){
+      steps{
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
       }
     }
   }
