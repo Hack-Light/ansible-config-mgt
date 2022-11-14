@@ -1,5 +1,5 @@
 [db]
-172.31.86.186 ansible_ssh_user='ubuntu' ansible_ssh_private_key_file=/home/ubuntu/.ssh/light_aws.pem
+172.31.86.186 ansible_ssh_user='ubuntu'
 
 [nginx]
 172.31.87.59 ansible_ssh_user='ec2-user'
