@@ -171,14 +171,17 @@ sudo yum  install php-xdebug
 ---
 ## for database connection
 
-```
-<!-- env config -->
+```bash
+# env var
 DB_CONNECTION=mysql
 DB_PORT=3306
 
-<!-- bash -->
+# bash
 sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
-sudo yum install mysql -y
+# change bind-address from 127.0.0.1 to 0.0.0.0 
+
+
+sudo yum install mysql-client -y
 ```
 
 > Learn how to install Jenkins [here](https://www.jenkins.io/doc/book/installing/)
