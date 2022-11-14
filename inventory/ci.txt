@@ -8,4 +8,4 @@
 172.31.31.63
 
 [artifactory]
-54.165.34.198 ansible_ssh_user='centos' ansible_ssh_private_key_file=/home/ubuntu/.ssh/light_aws.pem
+172.31.28.50 ansible_ssh_user='ec2-user' 

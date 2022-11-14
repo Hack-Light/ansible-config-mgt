@@ -85,16 +85,56 @@ export CLASSPATH=.:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar
 ## Install  php
 
 ```bash
+# RHEL
 yum module reset php -y
 
 yum module enable php:remi-7.4 -y
 
-yum install -y php  php-common php-mbstring php-opcache php-intl php-xml php-gd php-curl php-mysqlnd php-fpm php-json
+yum install -y php7.4  php7.4-common php7.4-mbstring php7.4-opcache php7.4-intl php7.4-xml php7.4-gd php7.4-curl php7.4-mysqlnd php7.4-fpm php7.4-json
 
 systemctl start php-fpm
 
 systemctl enable php-fpm
 ```
+
+```bash
+
+sudo apt -y install software-properties-common
+
+sudo add-apt-repository ppa:ondrej/php
+
+sudo apt-get update
+
+sudo apt -y install php7.4
+
+php -v
+
+sudo apt-get install php7.4-PACKAGE_NAME
+
+sudo apt-get install -y php7.4-common php7.4-mbstring php7.4-opcache php7.4-intl php7.4-xml php7.4-gd php7.4-curl php7.4-mysqlnd php7.4-fpm php7.4-json
+
+systemctl start php7.4-fpm
+
+systemctl enable php7.4-fpm
+
+# This command will install the following modules:
+
+# php7.4-cli - command interpreter, useful for testing PHP scripts from a shell or performing general shell scripting tasks
+# php7.4-json - for working with JSON data
+# php7.4-common - documentation, examples, and common modules for PHP
+# php7.4-mysql - for working with MySQL databases
+# php7.4-zip - for working with compressed files
+# php7.4-gd - for working with images
+# php7.4-mbstring - used to manage non-ASCII strings
+# php7.4-curl - lets you make HTTP requests in PHP
+# php7.4-xml - for working with XML data
+# php7.4-bcmath - used when working with precision floats
+
+
+# PHP configurations related to Apache are stored in /etc/php/7.4/apache2/php.ini. You can list all loaded PHP modules with the following command:
+php -m
+```
+
 ---
 ## Ansible dependencies to install
 
