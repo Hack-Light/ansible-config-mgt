@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        ANSIBLE_CONFIG = '/etc/ansible/ansible.cfg'
+        ANSIBLE_CONFIG = '${WORKSPACE}/deploy/ansible.cfg'
     }
 
     parameters {
@@ -32,14 +32,14 @@ pipeline {
     stage('Prepare Ansible For Execution') {
       steps {
         sh 'echo ${WORKSPACE}'
-        sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" /etc/ansible/ansible.cfg'
+        sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'
       }
     }
 
     stage('Execute Ansible') {
       steps {
         script {
-          ansiblePlaybook credentialsId: 'ec2-user-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}.txt', playbook: 'playbooks/site.yml'
+          ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}.txt', playbook: 'playbooks/site.yml'
         }
       }
     }

@@ -10,13 +10,17 @@
 # - name: Webserver assignment
 #   import_playbook: ../static-assignments/uat-webservers.yml
 
-- hosts: artifactory
-- name: artifactory assignment
-  import_playbook: ../static-assignments/artifactory.yml
+# - hosts: artifactory
+# - name: artifactory assignment
+#   import_playbook: ../static-assignments/artifactory.yml
 
-# - hosts: db
-# - name: DB assignment
-#   import_playbook: ../static-assignments/db.yml
+- hosts: db
+- name: DB assignment
+  import_playbook: ../static-assignments/db.yml
+
+- hosts: nginx
+- name: nginx assignment
+  ansible.builtin.import_playbook: ../static-assignments/nginx.yml
 
 # - hosts: lb
 # - name: Loadbalancers assignment
