@@ -49,5 +49,17 @@ pipeline {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
       }
     }
+
+    stage('SonarQube Quality Gate') {
+      environment {
+          scannerHome = tool 'SonarQubeScanner'
+      }
+      steps {
+          withSonarQubeEnv('sonarqube') {
+              sh "${scannerHome}/bin/sonar-scanner"
+          }
+
+      }
+    }
   }
 }
