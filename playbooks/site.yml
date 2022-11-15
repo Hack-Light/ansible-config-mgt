@@ -27,6 +27,10 @@
 #   import_playbook: ../static-assignments/loadbalancers.yml
 #   when: load_balancer_is_required
 
-- hosts: todo
-- name: Deploy the todo application
-  ansible.builtin.import_playbook: ../static-assignments/deployment.yml
+# - hosts: todo
+# - name: Deploy the todo application
+#   ansible.builtin.import_playbook: ../static-assignments/deployment.yml
+
+- hosts: sonar
+- name: sonar assignment
+  ansible.builtin.import_playbook: ../static-assignments/sonar.yml

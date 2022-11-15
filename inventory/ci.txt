@@ -4,8 +4,8 @@
 [nginx]
 172.31.87.76
 
-[sonarqube]
-172.31.31.63
+[sonar]
+172.31.29.46 ansible_ssh_user='ubuntu'
 
 [artifactory]
 172.31.28.50 ansible_ssh_user='ec2-user' 
