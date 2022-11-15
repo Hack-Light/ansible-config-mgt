@@ -128,7 +128,7 @@ mysql_users:
 mysql_users:
   - name: homestead
     # ip address of the jenkins server
-    host: 172.31.26.121
+    host: 172.31.26.198
     password: sePret^i
     priv: '*.*:ALL,GRANT'
 
