@@ -14,9 +14,9 @@
 # - name: artifactory assignment
 #   import_playbook: ../static-assignments/artifactory.yml
 
-- hosts: db
-- name: DB assignment
-  import_playbook: ../static-assignments/db.yml
+# - hosts: db
+# - name: DB assignment
+#   import_playbook: ../static-assignments/db.yml
 
 # - hosts: nginx
 # - name: nginx assignment
@@ -26,3 +26,7 @@
 # - name: Loadbalancers assignment
 #   import_playbook: ../static-assignments/loadbalancers.yml
 #   when: load_balancer_is_required
+
+- hosts: todo
+- name: Deploy the todo application
+  ansible.builtin.import_playbook: ../static-assignments/deployment.yml
