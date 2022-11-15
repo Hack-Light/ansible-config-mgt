@@ -50,10 +50,12 @@
 
     - name: Download the artifact
       get_url:
+        # get from jfrog
         url: http://34.227.224.175:8082/artifactory/light/php-todo
         dest: /home/ec2-user/
         url_username: admin
-        url_password: APBKm4qXoDaoE4pTfHAD6iPnJMh  
+        # get from jfrog
+        url_password: AP3bmydo8JH3H99wCv7nNvtjMgj  
 
 
     - name: unzip the artifacts
