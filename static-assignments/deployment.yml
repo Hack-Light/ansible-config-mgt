@@ -51,7 +51,7 @@
     - name: Download the artifact
       get_url:
         # get from jfrog
-        url: http://34.227.224.175:8082/artifactory/light/php-todo
+        url: http://18.205.238.236:8082/artifactory/light/php-todo
         dest: /home/ec2-user/
         url_username: admin
         # get from jfrog
